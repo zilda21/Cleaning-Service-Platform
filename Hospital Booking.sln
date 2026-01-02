@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleaningService.Web", "CleaningService.Web\CleaningService.Web.csproj", "{9F83A6C7-8052-6D41-017B-5D941BC8114D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9F83A6C7-8052-6D41-017B-5D941BC8114D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F83A6C7-8052-6D41-017B-5D941BC8114D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F83A6C7-8052-6D41-017B-5D941BC8114D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F83A6C7-8052-6D41-017B-5D941BC8114D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D7431C52-E136-411A-AFC3-FBE683D9868D}
+	EndGlobalSection
+EndGlobal
