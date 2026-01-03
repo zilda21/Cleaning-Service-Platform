@@ -1,10 +1,200 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#home">CleanService</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="#reviews">Reviews</a></li>
+                <li class="nav-item"><a class="nav-link btn btn-primary text-white ms-2" href="#booking">Book Now</a></li>
+                <li class="nav-item"><a class="nav-link" asp-page="/Login">Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO / HEADER -->
+<section id="home" class="py-5 bg-light text-center">
+    <div class="container">
+        <h1 class="display-5 fw-bold">Professional Home Cleaning Services</h1>
+        <p class="lead mt-3">
+            Reliable, affordable, and easy-to-book cleaning services for your home.
+        </p>
+        <a href="#booking" class="btn btn-primary btn-lg mt-3">Book a Cleaning</a>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="py-5">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-4">Our Services</h2>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Regular Cleaning</h5>
+                        <p class="card-text">
+                            Weekly or monthly cleaning to keep your home fresh and tidy.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Deep Cleaning</h5>
+                        <p class="card-text">
+                            Detailed cleaning for kitchens, bathrooms, and living areas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Move-in / Move-out</h5>
+                        <p class="card-text">
+                            Perfect cleaning before moving in or after moving out.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHY US -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-4">Why Choose Us</h2>
+
+        <div class="row text-center">
+            <div class="col-md-3">✔ Trusted & trained cleaners</div>
+            <div class="col-md-3">✔ Easy online booking</div>
+            <div class="col-md-3">✔ Flexible scheduling</div>
+            <div class="col-md-3">✔ Transparent pricing</div>
+        </div>
+    </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="py-5">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-4">What Our Customers Say</h2>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        ⭐⭐⭐⭐⭐
+                        <p class="mt-2">“Very professional and easy booking process.”</p>
+                        <small>— Sarah M.</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        ⭐⭐⭐⭐⭐
+                        <p class="mt-2">“Cleaner arrived on time and did a great job.”</p>
+                        <small>— Ahmed K.</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        ⭐⭐⭐⭐☆
+                        <p class="mt-2">“Good service, will book again.”</p>
+                        <small>— Lina P.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a asp-page="/Login" class="btn btn-outline-primary">Add Feedback</a>
+        </div>
+    </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-4">Book Your Cleaning</h2>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+
+                        <div class="mb-3">
+                            <label class="form-label">Service</label>
+                            <select class="form-select">
+                                <option>Regular Cleaning</option>
+                                <option>Deep Cleaning</option>
+                                <option>Move-in / Move-out</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Date</label>
+                            <input type="date" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Time</label>
+                            <select class="form-select">
+                                <option>09:00 – 11:00</option>
+                                <option>11:00 – 13:00</option>
+                                <option>14:00 – 16:00</option>
+                            </select>
+                        </div>
+
+                        <button class="btn btn-primary w-100">
+                            Book Now
+                        </button>
+
+                        <small class="text-muted d-block text-center mt-2">
+                            Login required to save and manage your booking.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="py-5 text-center">
+    <div class="container">
+        <h2 class="fw-bold">Ready for a clean and fresh home?</h2>
+        <a href="#booking" class="btn btn-primary btn-lg mt-3">Book a Cleaning Now</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-dark text-white py-4">
+    <div class="container text-center">
+        <p class="mb-1">📧 support@cleanservice.com</p>
+        <p class="mb-1">📞 +45 00 00 00 00</p>
+        <small>© 2025 CleanService. All rights reserved.</small>
+    </div>
+</footer>
