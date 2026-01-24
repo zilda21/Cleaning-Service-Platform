@@ -19,7 +19,7 @@ var app = builder.Build();
 
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+// builder.Services.AddRazorPages();
 
 
 // Configure the HTTP request pipeline.

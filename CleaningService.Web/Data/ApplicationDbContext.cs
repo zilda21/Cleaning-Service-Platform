@@ -11,6 +11,7 @@ public class ApplicationDbContext : IdentityDbContext
         : base(options) {}
     
          public DbSet<User> Users { get; set; }
+             public DbSet<Booking> Bookings { get; set; }
 
     
 }

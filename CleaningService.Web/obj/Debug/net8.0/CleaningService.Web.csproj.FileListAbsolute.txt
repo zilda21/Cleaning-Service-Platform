@@ -240,7 +240,6 @@ C:\Users\Admin\Downloads\Service-Customer\CleaningService.Web\obj\Debug\net8.0\C
 C:\Users\Admin\Downloads\Service-Customer\CleaningService.Web\obj\Debug\net8.0\CleaningService.Web.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Admin\Downloads\Service-Customer\CleaningService.Web\obj\Debug\net8.0\CleaningService.Web.RazorAssemblyInfo.cache
 C:\Users\Admin\Downloads\Service-Customer\CleaningService.Web\obj\Debug\net8.0\CleaningService.Web.RazorAssemblyInfo.cs
-C:\Users\Admin\Downloads\Service-Customer\CleaningService.Web\obj\Debug\net8.0\CleaningService.Web.sourcelink.json
 C:\Users\Admin\Downloads\Service-Customer\CleaningService.Web\obj\Debug\net8.0\rjimswa.dswa.cache.json
 C:\Users\Admin\Downloads\Service-Customer\CleaningService.Web\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 C:\Users\Admin\Downloads\Service-Customer\CleaningService.Web\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
@@ -257,3 +256,5 @@ C:\Users\Admin\Downloads\Service-Customer\CleaningService.Web\obj\Debug\net8.0\r
 C:\Users\Admin\Downloads\Service-Customer\CleaningService.Web\obj\Debug\net8.0\CleaningService.Web.pdb
 C:\Users\Admin\Downloads\Service-Customer\CleaningService.Web\obj\Debug\net8.0\CleaningService.Web.genruntimeconfig.cache
 C:\Users\Admin\Downloads\Service-Customer\CleaningService.Web\obj\Debug\net8.0\ref\CleaningService.Web.dll
+C:\Users\Admin\Downloads\Service-Customer\CleaningService.Web\bin\Debug\net8.0\Npgsql.dll
+C:\Users\Admin\Downloads\Service-Customer\CleaningService.Web\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
