@@ -1,0 +1,211 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Hjem";
+    ViewData["BodyClass"] = "index-page";
+}
+
+<!-- HERO SECTION -->
+<section id="hero" class="hero section">
+    <div class="container hero-content">
+        <div class="row align-items-center">
+            <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
+                <h1 class="mb-3">Professionel rengøring til hjem og erhverv</h1>
+
+<p class="mb-3">
+  Hos THS Pleje tilbyder vi både privat og erhvervsrengøring med et stærkt fokus på kvalitet og service.
+  Uanset om det drejer sig om dit hjem eller din virksomhed, kan du forvente en skinnende ren og indbydende atmosfære.
+</p>
+
+<p class="mb-3">
+  Vores dedikerede team tilpasser rengøringen til dine specifikke behov og sørger for, at du altid kommer hjem eller
+  tilbage til et sted, der er både rent og behageligt.
+</p>
+
+<p class="mb-0 fw-semibold">
+  Vi er mere end bare et rengøringsfirma – vi er din pålidelige partner, der gør en forskel i din hverdag.
+</p>
+                <div class="cta-group">
+                    <a class="btn-primary" asp-page="/login">Book rengøring</a>
+                    <a class="btn-secondary" href="#services">
+                        <i class="bi bi-arrow-right-circle"></i>
+                        <span>Se services</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-6 hero-image" data-aos="fade-up" data-aos-delay="200">
+                <img src="~/assets/img/Firstphotos.png" alt="Rengøring" class="img-fluid">
+
+                <div class="floating-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card-content">
+                        <div class="metric">
+                            <span class="number">5★</span>
+                            <span class="label">Kundeanmeldelser</span>
+                        </div>
+                        <div class="metric">
+                            <span class="number">100%</span>
+                            <span class="label">Pålidelig service</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-features">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-item">
+                        <div class="icon"><i class="bi bi-shield-check"></i></div>
+                        <h4>Tryghed</h4>
+                        <p>Pålideligt personale og klare aftaler.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-item">
+                        <div class="icon"><i class="bi bi-clock-history"></i></div>
+                        <h4>Fleksible tider</h4>
+                        <p>Vi tilpasser os din hverdag og kalender.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-item">
+                        <div class="icon"><i class="bi bi-stars"></i></div>
+                        <h4>Kvalitet</h4>
+                        <p>Grundig rengøring med fokus på detaljen.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-item">
+                        <div class="icon"><i class="bi bi-credit-card"></i></div>
+                        <h4>Gennemsigtige priser</h4>
+                        <p>Ingen overraskelser – kun god service.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services section light-background">
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="section-title">
+            <h2>Vores services</h2>
+            <p>Vælg den løsning der passer dig – privat eller erhverv.</p>
+        </div>
+
+        <div class="row gy-4">
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="150">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="bi bi-calendar2-check"></i>
+                    </div>
+                    <h3>Regelmæssig rengøring</h3>
+                    <p>Ugentlig eller månedlig rengøring for et rent hjem.</p>
+                    <a class="service-link" asp-page="/login">
+                        <span>Book</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="250">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="bi bi-bucket"></i>
+                    </div>
+                    <h3>Hovedrengøring</h3>
+                    <p>Grundig rengøring af køkken, bad og opholdsrum.</p>
+                    <a class="service-link" asp-page="/login">
+                        <span>Book</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="350">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="bi bi-house-check"></i>
+                    </div>
+                    <h3>Ind- &amp; udflytningsrengøring</h3>
+                    <p>Perfekt før indflytning eller efter fraflytning.</p>
+                    <a class="service-link" asp-page="/login">
+                        <span>Book</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHY US -->
+<section class="section">
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="section-title">
+            <h2>Hvorfor vælge os?</h2>
+            <p>Vi gør det nemt at få et rent og friskt hjem – uden stress.</p>
+        </div>
+
+        <ul class="list-unstyled why-list">
+            <li><i class="bi bi-check2-circle"></i><span>Professionelt og pålideligt personale</span></li>
+            <li><i class="bi bi-check2-circle"></i><span>Nem online booking</span></li>
+            <li><i class="bi bi-check2-circle"></i><span>Fleksible tider</span></li>
+            <li><i class="bi bi-check2-circle"></i><span>Gennemsigtige priser</span></li>
+        </ul>
+    </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="section light-background">
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="section-title">
+            <h2>Hvad siger vores kunder?</h2>
+            <p>Et par korte ord fra mennesker vi har hjulpet.</p>
+        </div>
+
+        <div class="row gy-4">
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="150">
+                <div class="review-card">
+                    <div class="review-stars" aria-label="5 stjerner">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                    </div>
+                    <p>“Meget professionel service og nem booking.”</p>
+                    <strong>— Sarah M.</strong>
+                </div>
+            </div>
+
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="250">
+                <div class="review-card">
+                    <div class="review-stars" aria-label="5 stjerner">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                    </div>
+                    <p>“Kom til tiden og gjorde et fantastisk stykke arbejde.”</p>
+                    <strong>— Ahmed K.</strong>
+                </div>
+            </div>
+
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="350">
+                <div class="review-card">
+                    <div class="review-stars" aria-label="4 stjerner">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i>
+                    </div>
+                    <p>“God service – jeg booker igen.”</p>
+                    <strong>— Lina P.</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section dark-background">
+    <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
+        <h2 class="text-white mb-3">Klar til et rent og friskt hjem?</h2>
+        <a class="btn btn-primary btn-lg" asp-page="/login">Book en rengøring nu</a>
+    </div>
+</section>
