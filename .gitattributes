@@ -1,0 +1,8 @@
+# Hide vendor/template assets from GitHub language stats (does NOT affect runtime)
+wwwroot/assets/vendor/** linguist-vendored
+wwwroot/assets/css/** linguist-vendored
+wwwroot/lib/** linguist-vendored
+
+# If you have minified files anywhere
+*.min.css linguist-vendored
+*.min.js linguist-vendored
