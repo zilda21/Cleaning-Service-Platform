@@ -1,3 +1,5 @@
+﻿@using Microsoft.AspNetCore.Http
+
 <!DOCTYPE html>
 <html lang="da">
 <head>
@@ -56,12 +58,22 @@
             </a>
 
             <nav id="navmenu" class="navmenu">
-                <ul>
-                    <li><a asp-page="/Index" class="@(ViewData["Title"]?.ToString() == "Hjem" ? "active" : "")">Hjem</a></li>
-                    <li><a href="/#services">Services</a></li>
-                    <li><a href="/#reviews">Anmeldelser</a></li>
-                    <li><a asp-page="/login" class="nav-cta">Book nu</a></li>
-                </ul>
+             <ul>
+    <li><a asp-page="/Index" class="@(ViewData["Title"]?.ToString() == "Hjem" ? "active" : "")">Hjem</a></li>
+    <li><a href="/#services">Services</a></li>
+    <li><a href="/#reviews">Anmeldelser</a></li>
+
+    @if (Context.Session.GetString("Role") == "Admin")
+    {
+        <li><a asp-page="/Booking/Index">Booking Dashboard</a></li>
+        <li><a asp-page="/Admin/Index">Admin Dashboard</a></li>
+        <li><a asp-page="/Admin/Logs/Index">Logs Dashboard</a></li>
+    }
+    else
+    {
+        <li><a asp-page="/login" class="nav-cta">Book nu</a></li>
+    }
+</ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
         </div>

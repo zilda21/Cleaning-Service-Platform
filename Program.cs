@@ -3,16 +3,39 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// UI ONLY / DEMO MODE
+// Razor Pages (UI)
 builder.Services.AddRazorPages();
 
-// ❌ DATABASE & AUTH DISABLED FOR DEMO
-// builder.Services.AddDbContext<ApplicationDbContext>(options =>
-//     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+// API Controllers
+builder.Services.AddControllers();
+
+// ✅ HttpClientFactory (fixes: Unable to resolve IHttpClientFactory)
+builder.Services.AddHttpClient();
+
+// ✅ Session (for Role stored in session)
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+
+// Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+// Database
+var cs = builder.Configuration.GetConnectionString("DefaultConnection");
+if (string.IsNullOrWhiteSpace(cs))
+    throw new InvalidOperationException("Missing ConnectionStrings:DefaultConnection.");
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(cs));
 
 var app = builder.Build();
 
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+else
 {
     app.UseExceptionHandler("/Error");
     app.UseHsts();
@@ -23,9 +46,14 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-// ❌ AUTH DISABLED FOR DEMO
+// ✅ IMPORTANT: Session after routing, before endpoints
+app.UseSession();
+
+// (You are NOT using real auth yet)
+// app.UseAuthentication();
 // app.UseAuthorization();
 
 app.MapRazorPages();
+app.MapControllers();
 
 app.Run();

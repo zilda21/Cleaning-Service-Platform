@@ -9,8 +9,9 @@ namespace CleaningService.Web.Pages
 
         public IActionResult OnPost()
         {
-            // DEMO MODE – backend disabled
-            return Page();
+            
+             return Page();
+ 
         }
     }
 }

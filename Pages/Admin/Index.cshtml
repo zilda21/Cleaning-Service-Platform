@@ -1,0 +1,38 @@
+@page
+@model CleaningService.Web.Pages.Admin.IndexModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h2>Admin Dashboard</h2>
+
+@if (!string.IsNullOrWhiteSpace(Model.ErrorMsg))
+{
+    <div class="alert alert-danger">@Model.ErrorMsg</div>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th><th>Name</th><th>Email</th><th>Role</th><th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var u in Model.Users)
+    {
+        <tr>
+            <td>@u.Id</td>
+            <td>@u.Name</td>
+            <td>@u.Email</td>
+            <td>@u.Role</td>
+            <td>
+                <!-- OPTIONAL delete button (needs OnPostDelete + DELETE endpoint) -->
+                <form method="post" asp-page-handler="Delete" style="display:inline">
+                    <input type="hidden" name="id" value="@u.Id" />
+                    <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
