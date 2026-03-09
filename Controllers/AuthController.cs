@@ -48,13 +48,14 @@ public IActionResult Create([FromForm] User newUser)
     return Redirect("/login");
 }
 
-
 [HttpPost("login")]
-public IActionResult Login([FromForm] User req)
+[Consumes("application/x-www-form-urlencoded")]
+public IActionResult Login([FromForm] string? Email, [FromForm] string? Password)
 {
-    var user = _context.Users
-        .FirstOrDefault(u => u.Email == req.Email && u.Password == req.Password);
+    if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password))
+        return Redirect("/login?error=1");
 
+    var user = _context.Users.FirstOrDefault(u => u.Email == Email && u.Password == Password);
     if (user == null)
         return Redirect("/login?error=1");
 
@@ -63,8 +64,8 @@ public IActionResult Login([FromForm] User req)
     HttpContext.Session.SetString("Name", user.Name);
 
     return user.Role == "Admin"
-    ? Redirect("/Admin")
-    : Redirect("/Booking");  
+        ? Redirect("/Admin")
+        : Redirect("/Booking");
 }
 
     [HttpPut("users/{id:int}")]

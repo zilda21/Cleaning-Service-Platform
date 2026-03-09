@@ -1,64 +1,105 @@
-using System.Net.Http.Json;
+using System.Linq;
+using CleaningService.Web.Data;
 using CleaningService.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+
 
 namespace CleaningService.Web.Pages.Booking;
 
 public class IndexModel : PageModel
 {
-    private readonly IHttpClientFactory _http;
+    private readonly ApplicationDbContext _db;
 
-    public IndexModel(IHttpClientFactory http) => _http = http;
+    public IndexModel(ApplicationDbContext db)
+    {
+        _db = db;
+    }
 
     public List<Models.Booking> Bookings { get; set; } = new();
     public string? ErrorMsg { get; set; }
-    public string? SuccessMsg { get; set; }
 
-    public async Task<IActionResult> OnGetAsync()
+    [TempData]
+public string? SuccessMsg { get; set; }
+
+    public IActionResult OnGet()
     {
-        if (HttpContext.Session.GetInt32("UserId") == null)
-            return RedirectToPage("/login");
+        var userId = HttpContext.Session.GetInt32("UserId");
+        if (userId == null) return RedirectToPage("/login");
 
-        await LoadBookings();
+        LoadBookings(userId.Value);
         return Page();
     }
 
-    public async Task<IActionResult> OnPostAsync()
+    public IActionResult OnPost()
     {
-        if (HttpContext.Session.GetInt32("UserId") == null)
-            return RedirectToPage("/login");
+        var userId = HttpContext.Session.GetInt32("UserId");
+        if (userId == null) return RedirectToPage("/login");
 
-        var api = _http.CreateClient();
-        api.BaseAddress = new Uri($"{Request.Scheme}://{Request.Host}");
+        // Read form fields
+        var service = Request.Form["Service"].ToString();
+        var notes = Request.Form["Notes"].ToString();
+        var bookingDateStr = Request.Form["BookingDate"].ToString();
+        var startTimeStr = Request.Form["StartTime"].ToString();
+        var endTimeStr = Request.Form["EndTime"].ToString();
 
-        var fields = new Dictionary<string, string>
+        // Basic validation
+        if (string.IsNullOrWhiteSpace(service) ||
+            string.IsNullOrWhiteSpace(bookingDateStr) ||
+            string.IsNullOrWhiteSpace(startTimeStr) ||
+            string.IsNullOrWhiteSpace(endTimeStr))
         {
-            ["Service"] = Request.Form["Service"],
-            ["Notes"] = Request.Form["Notes"],
-            ["BookingDate"] = Request.Form["BookingDate"],
-            ["StartTime"] = Request.Form["StartTime"],
-            ["EndTime"] = Request.Form["EndTime"],
-        };
-
-        var res = await api.PostAsync("/api/bookings", new FormUrlEncodedContent(fields));
-
-        if (!res.IsSuccessStatusCode)
-        {
-            ErrorMsg = "Booking failed.";
-            await LoadBookings();
+            ErrorMsg = "Please fill all required fields.";
+            LoadBookings(userId.Value);
             return Page();
         }
 
-        SuccessMsg = "Booking created!";
-        return RedirectToPage(); // refresh
+        if (!DateOnly.TryParse(bookingDateStr, out var bookingDate))
+        {
+            ErrorMsg = "Invalid date.";
+            LoadBookings(userId.Value);
+            return Page();
+        }
+
+        if (!TimeOnly.TryParse(startTimeStr, out var startTime) ||
+            !TimeOnly.TryParse(endTimeStr, out var endTime))
+        {
+            ErrorMsg = "Invalid time.";
+            LoadBookings(userId.Value);
+            return Page();
+        }
+
+        if (endTime <= startTime)
+        {
+            ErrorMsg = "End time must be after start time.";
+            LoadBookings(userId.Value);
+            return Page();
+        }
+
+        // Create booking object
+        var booking = new Models.Booking
+        {
+            UserId = userId.Value,
+            Service = service,
+            Notes = string.IsNullOrWhiteSpace(notes) ? null : notes,
+            BookingDate = bookingDate,
+            StartTime = startTime,
+            EndTime = endTime,
+            Status = "Pending",
+            CreatedAt = DateTime.UtcNow
+        };
+
+        _db.Bookings.Add(booking);
+        _db.SaveChanges();
+
+        return RedirectToPage(); // reload list
     }
 
-    private async Task LoadBookings()
+    private void LoadBookings(int userId)
     {
-        var api = _http.CreateClient();
-        api.BaseAddress = new Uri($"{Request.Scheme}://{Request.Host}");
-
-        Bookings = await api.GetFromJsonAsync<List<Models.Booking>>("/api/bookings/my") ?? new();
+        Bookings = _db.Bookings
+            .Where(b => b.UserId == userId)
+            .OrderByDescending(b => b.CreatedAt)
+            .ToList();
     }
 }

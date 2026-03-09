@@ -10,7 +10,7 @@ public class ApplicationDbContext : IdentityDbContext
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options) {}
     
-         public DbSet<User> Users { get; set; }
+         public new DbSet<User> Users { get; set; }
              public DbSet<Booking> Bookings { get; set; }
 
     
