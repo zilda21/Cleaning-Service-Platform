@@ -63,8 +63,8 @@ public IActionResult Login([FromForm] User req)
     HttpContext.Session.SetString("Name", user.Name);
 
     return user.Role == "Admin"
-        ? Redirect("/Admin")
-        : Redirect("/Index");
+    ? Redirect("/Admin")
+    : Redirect("/Booking");  
 }
 
     [HttpPut("users/{id:int}")]

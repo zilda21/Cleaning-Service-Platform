@@ -42,6 +42,13 @@ namespace CleaningService.Web.Migrations
                     b.Property<TimeOnly>("EndTime")
                         .HasColumnType("time without time zone");
 
+                    b.Property<string>("Notes")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Service")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<TimeOnly>("StartTime")
                         .HasColumnType("time without time zone");
 
