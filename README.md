@@ -1,12 +1,14 @@
 # Cleaning Service Customer Portal (Razor Pages + REST API)
 
-A full-stack web application for a cleaning service where customers can register, log in, and create service bookings. Admin users can access an admin dashboard to view and manage users (and later bookings/logs).
+A full-stack web application for a cleaning service where customers can register, log in, and create service bookings. Admin users can access an admin dashboard to manage users (and later bookings/logs).
+
+🚀 **Deployment is coming soon** — the next phase focuses on a complete booking dashboard experience, background processing with **RabbitMQ**, and connecting the system to a **cloud-based microservices architecture**.
 
 ---
 
 ## Purpose
 
-This project was built to support a cleaning business workflow:
+This project was built to support a real cleaning business workflow:
 
 - Customers create accounts and log in
 - Customers book cleaning services by selecting:
@@ -16,7 +18,7 @@ This project was built to support a cleaning business workflow:
   - notes (optional)
 - Admin can manage users and monitor the system from a dashboard
 
-The goal is a simple, clear architecture that separates:
+The goal is a clean architecture that separates:
 - **UI (Razor Pages)** for the user experience
 - **REST API Controllers** for backend operations and database access
 
@@ -30,6 +32,11 @@ The goal is a simple, clear architecture that separates:
 - **Auth (Demo / Custom):** Session-based login using a `Users` table (email/password) + role (`Admin` / `User`)
 - **UI:** Razor Pages + Bootstrap styling/template assets
 - **API Testing:** Swagger UI
+
+### Planned / In Progress
+- **Message Broker:** RabbitMQ (for async workflows)
+- **Cloud Deployment:** coming soon
+- **Architecture:** Microservices-ready design (API + background workers + integrations)
 
 ---
 
@@ -80,6 +87,27 @@ The goal is a simple, clear architecture that separates:
 
 ---
 
+## Deployment & Cloud Roadmap (Coming Soon)
+
+This project is moving toward a cloud-ready setup with microservices and event-driven processing:
+
+- 🔜 **Booking Dashboard Expansion**
+  - Admin booking management (approve/cancel/update status)
+  - Customer booking history improvements
+  - Better validation + status tracking
+
+- 🔜 **RabbitMQ Integration**
+  - Publish events like `BookingCreated`, `BookingCancelled`
+  - Background workers for notifications, reminders, and processing
+  - Decouple UI/API from long-running tasks
+
+- 🔜 **Microservices + Cloud System**
+  - Split services into logical components (Auth, Booking, Notification, Admin)
+  - Container-friendly architecture
+  - Cloud deployment + environment configuration
+
+---
+
 ## Project Structure (High-Level)
 
 - `Pages/`
@@ -122,19 +150,17 @@ The goal is a simple, clear architecture that separates:
 
 ---
 
-## What’s Next (Planned)
+## What’s Next
 
 - 🔜 Move booking operations fully into REST API (`BookingsController`)
-- 🔜 Add admin booking management (approve/cancel/update status)
+- 🔜 Add admin booking management UI
 - 🔜 Add logout endpoint + UI button
 - 🔜 Replace plain-text password storage with hashing OR integrate ASP.NET Identity
-- 🔜 Add better validation, error handling, and user-friendly messages
 - 🔜 Add pagination/search in admin dashboard
+- 🔜 RabbitMQ integration + cloud deployment
 
 ---
 
 ## Disclaimer (Current Demo State)
 
 This version uses a simple custom login with email/password stored in the `Users` table (no hashing yet). This is suitable for learning/demo purposes. A production version should use password hashing and proper authentication (Identity or JWT).
-
----
