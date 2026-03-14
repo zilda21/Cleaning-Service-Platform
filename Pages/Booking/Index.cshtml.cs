@@ -4,7 +4,6 @@ using CleaningService.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-
 namespace CleaningService.Web.Pages.Booking;
 
 public class IndexModel : PageModel
@@ -20,7 +19,7 @@ public class IndexModel : PageModel
     public string? ErrorMsg { get; set; }
 
     [TempData]
-public string? SuccessMsg { get; set; }
+    public string? SuccessMsg { get; set; }
 
     public IActionResult OnGet()
     {
@@ -36,14 +35,12 @@ public string? SuccessMsg { get; set; }
         var userId = HttpContext.Session.GetInt32("UserId");
         if (userId == null) return RedirectToPage("/login");
 
-        // Read form fields
         var service = Request.Form["Service"].ToString();
         var notes = Request.Form["Notes"].ToString();
         var bookingDateStr = Request.Form["BookingDate"].ToString();
         var startTimeStr = Request.Form["StartTime"].ToString();
         var endTimeStr = Request.Form["EndTime"].ToString();
 
-        // Basic validation
         if (string.IsNullOrWhiteSpace(service) ||
             string.IsNullOrWhiteSpace(bookingDateStr) ||
             string.IsNullOrWhiteSpace(startTimeStr) ||
@@ -76,7 +73,63 @@ public string? SuccessMsg { get; set; }
             return Page();
         }
 
-        // Create booking object
+        // Today's date
+        var today = DateOnly.FromDateTime(DateTime.Now);
+
+        // 1) Prevent past date
+        if (bookingDate < today)
+        {
+            ErrorMsg = "Booking date cannot be in the past.";
+            LoadBookings(userId.Value);
+            return Page();
+        }
+
+        // 2) Prevent past time if booking is for today
+        var nowTime = TimeOnly.FromDateTime(DateTime.Now);
+        if (bookingDate == today && startTime <= nowTime)
+        {
+            ErrorMsg = "Start time must be in the future for today's booking.";
+            LoadBookings(userId.Value);
+            return Page();
+        }
+
+        // 3) Business hours validation
+        var openingTime = new TimeOnly(8, 0);   // 08:00
+        var closingTime = new TimeOnly(18, 0);  // 18:00
+
+        if (startTime < openingTime || endTime > closingTime)
+        {
+            ErrorMsg = "Bookings are only allowed between 08:00 and 18:00.";
+            LoadBookings(userId.Value);
+            return Page();
+        }
+
+        // 4) Weekend validation
+        var bookingDateTime = bookingDate.ToDateTime(TimeOnly.MinValue);
+        if (bookingDateTime.DayOfWeek == DayOfWeek.Saturday ||
+            bookingDateTime.DayOfWeek == DayOfWeek.Sunday)
+        {
+            ErrorMsg = "Bookings are only allowed on weekdays.";
+            LoadBookings(userId.Value);
+            return Page();
+        }
+
+        // 5) Prevent overlap for same user and same date
+        bool hasOverlap = _db.Bookings.Any(b =>
+            b.UserId == userId.Value &&
+            b.BookingDate == bookingDate &&
+            b.Status != "Cancelled" &&
+            startTime < b.EndTime &&
+            endTime > b.StartTime
+        );
+
+        if (hasOverlap)
+        {
+            ErrorMsg = "You already have another booking that overlaps with this time.";
+            LoadBookings(userId.Value);
+            return Page();
+        }
+
         var booking = new Models.Booking
         {
             UserId = userId.Value,
@@ -92,7 +145,8 @@ public string? SuccessMsg { get; set; }
         _db.Bookings.Add(booking);
         _db.SaveChanges();
 
-        return RedirectToPage(); // reload list
+        SuccessMsg = "Booking created successfully.";
+        return RedirectToPage();
     }
 
     private void LoadBookings(int userId)

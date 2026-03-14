@@ -3,14 +3,18 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Razor Pages (UI)
+
 builder.Services.AddRazorPages();
 
-// API Controllers
+
 builder.Services.AddControllers();
 
 // ✅ HttpClientFactory (fixes: Unable to resolve IHttpClientFactory)
 builder.Services.AddHttpClient();
+
+
+builder.Services.AddSession();
+builder.Services.AddHttpContextAccessor(); // <-- THIS LINE WAS MISSING
 
 // ✅ Session (for Role stored in session)
 builder.Services.AddDistributedMemoryCache();

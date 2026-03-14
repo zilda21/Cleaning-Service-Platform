@@ -1,5 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Http
 
+@inject IHttpContextAccessor HttpContextAccessor
+
 <!DOCTYPE html>
 <html lang="da">
 <head>
@@ -59,19 +61,26 @@
 
             <nav id="navmenu" class="navmenu">
              <ul>
-    <li><a asp-page="/Index" class="@(ViewData["Title"]?.ToString() == "Hjem" ? "active" : "")">Hjem</a></li>
+    <li><a asp-page="/Index" class="@(ViewData["Title"]?.ToString() == "Hjem" ? "active" : "")">Home</a></li>
     <li><a href="/#services">Services</a></li>
-    <li><a href="/#reviews">Anmeldelser</a></li>
+    <li><a href="/#reviews">Reviews</a></li>
 
-    @if (Context.Session.GetString("Role") == "Admin")
-    {
-        <li><a asp-page="/Booking/Index">Booking Dashboard</a></li>
-        <li><a asp-page="/Admin/Index">Admin Dashboard</a></li>
-        <li><a asp-page="/Admin/Logs/Index">Logs Dashboard</a></li>
-    }
+  
+@if (HttpContextAccessor.HttpContext.Session.GetString("Role") == "Admin")
+        {
+            <li><a asp-page="/Booking/Index">Booking Dashboard</a></li>
+            <li><a asp-page="/Admin/Logs/Index">Logs Dashboard</a></li>
+            <li><a asp-page="/Logout">Log Out</a></li>
+        }
+   
+       else if (HttpContextAccessor.HttpContext.Session.GetString("Role") == "User")
+{
+    <li><a asp-page="/Booking/Index">My Bookings</a></li>
+    <li><a asp-page="/Logout">Log Out</a></li>
+}
     else
     {
-        <li><a asp-page="/login" class="nav-cta">Book nu</a></li>
+        <li><a asp-page="/login" class="nav-cta">Book now</a></li>
     }
 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -136,3 +145,6 @@
 
 </body>
 </html>
+
+
+       
