@@ -1,166 +1,287 @@
-# Cleaning Service Customer Portal (Razor Pages + REST API)
+# Cleaning Service Full-Stack Application
 
-A full-stack web application for a cleaning service where customers can register, log in, and create service bookings. Admin users can access an admin dashboard to manage users (and later bookings/logs).
+A full-stack cleaning service platform where customers can register, log in, and book cleaning services while administrators manage users and monitor activity through an admin dashboard.
 
-🚀 **Deployment is coming soon** — the next phase focuses on a complete booking dashboard experience, background processing with **RabbitMQ**, and connecting the system to a **cloud-based microservices architecture**.
-
----
-
-## Purpose
-
-This project was built to support a real cleaning business workflow:
-
-- Customers create accounts and log in
-- Customers book cleaning services by selecting:
-  - service type
-  - booking date
-  - start time / end time
-  - notes (optional)
-- Admin can manage users and monitor the system from a dashboard
-
-The goal is a clean architecture that separates:
-- **UI (Razor Pages)** for the user experience
-- **REST API Controllers** for backend operations and database access
+This project demonstrates **ASP.NET Core full-stack development**, REST APIs, PostgreSQL integration, secure authentication, and cloud deployment.
 
 ---
 
-## Tech Stack
+# Live Demo
 
-- **Backend Framework:** ASP.NET Core (Razor Pages + API Controllers)
-- **Database:** PostgreSQL
-- **ORM:** Entity Framework Core
-- **Auth (Demo / Custom):** Session-based login using a `Users` table (email/password) + role (`Admin` / `User`)
-- **UI:** Razor Pages + Bootstrap styling/template assets
-- **API Testing:** Swagger UI
+The application is deployed online:
 
-### Planned / In Progress
-- **Message Broker:** RabbitMQ (for async workflows)
-- **Cloud Deployment:** coming soon
-- **Architecture:** Microservices-ready design (API + background workers + integrations)
+https://cleaning-service-full-stack-app.onrender.com/
+
+Hosted on **Render Cloud** with **PostgreSQL database integration**.
 
 ---
 
-## Features Completed (So Far)
+# Project Purpose
 
-### Authentication (Custom)
-- ✅ Sign Up (register new user)
-- ✅ Login (validate email/password)
-- ✅ Session storage on login:
-  - `UserId`
-  - `Role`
-  - `Name` (optional)
-- ✅ Role-based redirect:
-  - Admin → `/Admin`
-  - User → `/Booking`
+This system models a **real cleaning service workflow**.
 
-### User Roles
-- ✅ `Role` field stored in DB (`Admin` or `User`)
-- ✅ Admin role can be set directly from SQL (manual for now)
+Customers can:
 
-### Booking
-- ✅ Booking model created with:
-  - `Service`
-  - `Notes`
-  - `BookingDate` (DateOnly)
-  - `StartTime` / `EndTime` (TimeOnly)
-  - `Status`, `CreatedAt`, `CancelledAt`
-  - `UserId` (FK)
-- ✅ Booking UI created:
-  - create booking form
-  - view “My bookings”
-- ✅ Booking logic currently uses direct EF Core DB access inside Razor PageModel (to avoid session issues when calling API internally)
+- Create an account
+- Log in
+- Book cleaning services
+- View their bookings
 
-### Admin Dashboard
-- ✅ Admin UI page created (users table)
-- ✅ Loads users from API endpoint
-- ✅ Delete users from dashboard (calls API `DELETE`)
-- ✅ Navbar shows admin links only if session Role == `Admin`
+Administrators can:
 
-### REST API
-- ✅ Endpoints implemented (current):
-  - `GET /api/auth/users` → list users (safe fields)
-  - `POST /api/auth/registered` → register user
-  - `POST /api/auth/login` → login + session set
-  - `PUT /api/auth/users/{id}` → update user fields
-  - `DELETE /api/auth/users/{id}` → delete user
-- ✅ Swagger enabled for easy testing
+- Manage users
+- Monitor the system
+- Access an admin dashboard
+
+The system follows a **layered architecture** separating:
+
+- UI Layer (Razor Pages)
+- API Layer (REST Controllers)
+- Data Layer (Entity Framework + PostgreSQL)
+
+This design allows the system to scale toward **microservices architecture**.
 
 ---
 
-## Deployment & Cloud Roadmap (Coming Soon)
+# Tech Stack
 
-This project is moving toward a cloud-ready setup with microservices and event-driven processing:
+### Backend
+- ASP.NET Core
+- C#
+- REST API Controllers
 
-- 🔜 **Booking Dashboard Expansion**
-  - Admin booking management (approve/cancel/update status)
-  - Customer booking history improvements
-  - Better validation + status tracking
+### Frontend
+- Razor Pages
+- Bootstrap
 
-- 🔜 **RabbitMQ Integration**
-  - Publish events like `BookingCreated`, `BookingCancelled`
-  - Background workers for notifications, reminders, and processing
-  - Decouple UI/API from long-running tasks
+### Database
+- PostgreSQL
+- Entity Framework Core
 
-- 🔜 **Microservices + Cloud System**
-  - Split services into logical components (Auth, Booking, Notification, Admin)
-  - Container-friendly architecture
-  - Cloud deployment + environment configuration
+### Authentication & Security
+- JWT Token Authentication
+- Secure session handling
+- Password hashing
+- Role-based authorization (Admin / User)
 
----
+### API Tools
+- Swagger UI
 
-## Project Structure (High-Level)
-
-- `Pages/`
-  - `Index.cshtml` (Home)
-  - `login.cshtml`, `signup.cshtml`
-  - `Booking/Index.cshtml` (Booking UI)
-  - `Admin/Index.cshtml` (Admin Dashboard)
-- `Controllers/`
-  - `AuthController.cs` (REST endpoints for auth + user CRUD)
-- `Models/`
-  - `User.cs`
-  - `Booking.cs`
-- `Data/`
-  - `ApplicationDbContext.cs`
+### Deployment
+- Render Cloud Platform
 
 ---
 
-## How It Works (Flow)
+# Features
 
-### Customer
-1. Opens home page
-2. Clicks “Book”
-3. Registers or logs in
-4. After successful login → redirected to `/Booking`
-5. Creates booking and sees booking list
+## Authentication System
 
-### Admin
-1. Logs in with an account having `Role = "Admin"`
-2. After login → redirected to `/Admin`
-3. Admin dashboard appears in navbar
-4. Admin can view users and delete them
+Users can:
 
----
+- Register accounts
+- Log in securely
+- Receive authentication tokens
+- Maintain secure sessions
+- Log out using the logout endpoint
 
-## Database Notes
+Security features include:
 
-- PostgreSQL connection configured via `appsettings.json` / `appsettings.Development.json`
-- Entity Framework Core migrations are used to update schema
-- Admin role is set manually for now via SQL update/insert in DB client (e.g., DBeaver)
+- Password hashing
+- Token authentication
+- Role-based authorization
 
----
+Session stores:
 
-## What’s Next
+- UserId
+- Role
+- Name
 
-- 🔜 Move booking operations fully into REST API (`BookingsController`)
-- 🔜 Add admin booking management UI
-- 🔜 Add logout endpoint + UI button
-- 🔜 Replace plain-text password storage with hashing OR integrate ASP.NET Identity
-- 🔜 Add pagination/search in admin dashboard
-- 🔜 RabbitMQ integration + cloud deployment
+Role-based redirects:
+
+Admin → `/Admin`  
+User → `/Booking`
 
 ---
 
-## Disclaimer (Current Demo State)
+# Booking System
 
-This version uses a simple custom login with email/password stored in the `Users` table (no hashing yet). This is suitable for learning/demo purposes. A production version should use password hashing and proper authentication (Identity or JWT).
+Customers can create bookings by selecting:
+
+- Cleaning service type
+- Booking date
+- Start time
+- End time
+- Optional notes
+
+Each booking includes:
+
+- Service
+- Notes
+- BookingDate
+- StartTime
+- EndTime
+- Status
+- CreatedAt
+- CancelledAt
+- UserId (Foreign Key)
+
+Users can also view **their booking history**.
+
+---
+
+# Admin Dashboard
+
+Admin users can access a management dashboard that allows them to:
+
+- View registered users
+- Delete users
+- Monitor system activity
+
+Admin navigation appears dynamically when:
+
+```
+Session["Role"] == "Admin"
+```
+
+---
+
+# REST API Endpoints
+
+Authentication & user management endpoints:
+
+```
+GET    /api/auth/users
+POST   /api/auth/registered
+POST   /api/auth/login
+PUT    /api/auth/users/{id}
+DELETE /api/auth/users/{id}
+```
+
+Swagger UI is enabled for API testing.
+
+---
+
+# Project Architecture
+
+```
+CleaningService.Web
+│
+├── Pages
+│   ├── Index.cshtml
+│   ├── login.cshtml
+│   ├── signup.cshtml
+│   ├── logout.cshtml
+│   ├── logout.cshtml.cs
+│
+│   ├── Booking
+│   │   ├── Index.cshtml
+│   │   └── Index.cshtml.cs
+│
+│   ├── Admin
+│   │   ├── Index.cshtml
+│   │   └── Index.cshtml.cs
+│
+├── Controllers
+│   ├── AuthController.cs
+│   └── BookingController.cs     
+│
+├── Models
+│   ├── User.cs
+│   └── Booking.cs
+│
+├── Data
+│   └── ApplicationDbContext.cs
+│
+├── Program.cs
+└── appsettings.json
+```
+
+---
+
+# System Workflow
+
+## Customer
+
+1. Open homepage
+2. Register or login
+3. Redirect to booking page
+4. Create cleaning booking
+5. Booking stored in PostgreSQL database
+
+---
+
+## Admin
+
+1. Login using admin account
+2. Redirect to admin dashboard
+3. View users
+4. Manage user records
+
+---
+
+# Database
+
+The system uses **PostgreSQL with Entity Framework Core**.
+
+Database configuration is stored in:
+
+```
+appsettings.json
+```
+
+Admin role can be assigned manually through SQL.
+
+Example:
+
+```
+UPDATE Users
+SET Role = 'Admin'
+WHERE Email = 'admin@email.com';
+```
+
+---
+
+# Upcoming Improvements
+
+## RabbitMQ Integration
+
+The system will integrate **RabbitMQ** for asynchronous background processing.
+
+Example events:
+
+- BookingCreated
+- BookingCancelled
+- UserRegistered
+
+This will allow:
+
+- Notification services
+- Background workers
+- Decoupled system components
+
+---
+
+# AI Integration (Future)
+
+Planned AI features include:
+
+- Smart booking recommendations
+- Predictive scheduling optimization
+- AI-assisted customer support
+- Intelligent service demand analysis
+
+---
+
+# Microservices Architecture
+
+The system is designed to evolve into microservices such as:
+
+- Authentication Service
+- Booking Service
+- Notification Service
+- Admin Service
+- AI Recommendation Service
+
+Services will communicate through **REST APIs and RabbitMQ events**.
+
+---
