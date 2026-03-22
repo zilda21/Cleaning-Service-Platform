@@ -1,9 +1,9 @@
 using System.Net.Http.Json;
-using CleaningService.Web.Models;
+using CleaningService.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace CleaningService.Web.Pages.Admin;
+namespace CleaningService.Pages.Admin;
 
 public class IndexModel : PageModel
 {

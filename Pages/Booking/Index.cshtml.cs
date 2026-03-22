@@ -1,10 +1,10 @@
 using System.Linq;
-using CleaningService.Web.Data;
-using CleaningService.Web.Models;
+using CleaningService.Data;
+using CleaningService.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace CleaningService.Web.Pages.Booking;
+namespace CleaningService.Pages.Booking;
 
 public class IndexModel : PageModel
 {

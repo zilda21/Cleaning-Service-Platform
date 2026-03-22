@@ -164,7 +164,7 @@ Swagger UI is enabled for API testing.
 # Project Architecture
 
 ```
-CleaningService.Web
+CleaningService
 │
 ├── Pages
 │   ├── Index.cshtml

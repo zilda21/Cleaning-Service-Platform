@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace CleaningService.Web.Migrations
+namespace CleaningService.Migrations
 {
     /// <inheritdoc />
     public partial class AddBookingsTable : Migration

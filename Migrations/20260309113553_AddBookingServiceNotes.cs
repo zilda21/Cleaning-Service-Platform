@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace CleaningService.Web.Migrations
+namespace CleaningService.Migrations
 {
     /// <inheritdoc />
     public partial class AddBookingServiceNotes : Migration
