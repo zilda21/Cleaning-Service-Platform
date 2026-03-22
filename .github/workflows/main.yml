@@ -1,34 +1,29 @@
-name : publish 
+name: publish
 
-on: 
-workflow_dispatch
-
-push :
-
-branches:
--main
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
-publish:
+  publish:
+    runs-on: ubuntu-latest
 
-runs-on:
-ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-steps:
- - users: actions/checkout@v3
- 
- - name: Setup .Net 
- - users : actions/setup-dotnet
- with:
-   dotnet version: "6.0.x"
-   name: Restore
-   run: dotnet restore ./CurrentTimeService.sln
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: "6.0.x"
 
-   name : build 
-   run: dotnet build ./CurrentTimeService.sln --configuration Release --no-restore
+      - name: Restore
+        run: dotnet restore ./CurrentTimeService.sln
 
-   -name: Publish 
-   run: dotnet publish ./CurrentTimeService.sln --configuration Release --no-Build
-   
-   
+      - name: Build
+        run: dotnet build ./CurrentTimeService.sln --configuration Release --no-restore
 
+      - name: Publish
+        run: dotnet publish ./CurrentTimeService.sln --configuration Release --no-build
