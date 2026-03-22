@@ -40,6 +40,7 @@ public IActionResult Read()
 }
 
 [HttpPost("registered")]
+
 public IActionResult Create([FromForm] User newUser)
 {
     _context.Add(newUser);

@@ -1,0 +1,9 @@
+# Build output
+bin/
+obj/
+
+# Don't push frontend assets (keeps GitHub mostly C#)
+wwwroot/
+
+# Don't push local secrets
+appsettings.Development.json
