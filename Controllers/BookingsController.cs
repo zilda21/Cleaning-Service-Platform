@@ -1,5 +1,5 @@
 using CleaningService.Web.Data;
-using CleaningService.Web.Models;
+using CleaningService.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleaningService.Web.Controllers;

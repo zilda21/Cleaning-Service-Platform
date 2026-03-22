@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace CleaningService.Web.Pages
+namespace CleaningService.Pages
 {
     public class LoginModel : PageModel
     {

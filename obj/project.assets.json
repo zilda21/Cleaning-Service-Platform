@@ -7855,11 +7855,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\Downloads\\Service-Customer\\CleaningService.Web\\CleaningService.Web.csproj",
-      "projectName": "CleaningService.Web",
-      "projectPath": "C:\\Users\\Admin\\Downloads\\Service-Customer\\CleaningService.Web\\CleaningService.Web.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\Downloads\\Service-Customer\\CleaningService\\CleaningService.csproj",
+      "projectName": "CleaningService",
+      "projectPath": "C:\\Users\\Admin\\Downloads\\Service-Customer\\CleaningService\\CleaningService.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\Downloads\\Service-Customer\\CleaningService.Web\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\Downloads\\Service-Customer\\CleaningService\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config"

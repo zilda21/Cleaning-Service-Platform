@@ -1,4 +1,4 @@
-using CleaningService.Web.Data;
+using CleaningService.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
