@@ -20,10 +20,10 @@ jobs:
           dotnet-version: "8.0.x"
 
       - name: Restore
-        run: dotnet restore ./Cleaning-Service.sln
+        run: dotnet restore ./CleaningService.sln
 
       - name: Build
-        run: dotnet build ./Cleaning-Service.sln --configuration Release --no-restore
+        run: dotnet build ./CleaningService.sln --configuration Release --no-restore
 
       - name: Publish
-        run: dotnet publish ./Cleaning-Service.sln --configuration Release --no-build
+        run: dotnet publish ./CleaningService.sln --configuration Release --no-build
