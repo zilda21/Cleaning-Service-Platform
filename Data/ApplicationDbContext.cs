@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using CleaningService.Web.Models;
+using CleaningService.Models;
 
-namespace CleaningService.Web.Data
+namespace CleaningService.Data
 {
 
 public class ApplicationDbContext : IdentityDbContext

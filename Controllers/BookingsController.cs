@@ -1,8 +1,8 @@
-using CleaningService.Web.Data;
+using CleaningService.Data;
 using CleaningService.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CleaningService.Web.Controllers;
+namespace CleaningService.Controllers;
 
 [ApiController]
 [Route("api/bookings")]

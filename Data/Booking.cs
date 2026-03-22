@@ -1,4 +1,4 @@
-namespace CleaningService.Web.Models;
+namespace CleaningService.Models;
 
 public class Booking
 {

@@ -6,13 +6,13 @@ using System.Text.Json.Nodes;
 using System.Reflection.Metadata;
 using System.Xml.Linq;
 using System.ComponentModel.Design;
-using CleaningService.Web.Models;
+using CleaningService.Models;
 using System.Runtime.CompilerServices;
 using System.Formats.Tar;
 using Microsoft.AspNetCore.Http; // make sure this exists at top
 
 
-namespace CleaningService.Web.Controllers
+namespace CleaningService.Controllers
 {
     
 
