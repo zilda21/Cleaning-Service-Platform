@@ -83,7 +83,10 @@ public IActionResult Login([FromForm] string? Email, [FromForm] string? Password
     return user.Role == "Admin"
         ? Redirect("/Admin")
         : Redirect("/Booking");
+
+        
 }
+
 
     [HttpPut("users/{id:int}")]
 public IActionResult Update(int id, [FromForm] User updated)
