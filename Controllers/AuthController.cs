@@ -54,6 +54,12 @@ public IActionResult Create([FromForm] User newUser)
         newUser.Role = "User";
     }
 
+    var existingUser = _context.Users.FirstOrDefault(u => u.Email == newUser.Email);
+    if (existingUser != null)
+    {
+        return Redirect("/signup?exists=1");
+    }
+
     _context.Users.Add(newUser);
     _context.SaveChanges();
 
