@@ -63,13 +63,13 @@
                         <li><a href="/#services">Services</a></li>
                         <li><a href="/#reviews">Reviews</a></li>
 
-                        @if (string.Equals(role, "Admin", StringComparison.OrdinalIgnoreCase))
+                        @if (role == "Admin")
                         {
                             <li><a asp-page="/Booking/Index">Booking Dashboard</a></li>
-                            <li><a asp-page="/Admin/Logs/Index">Logs Dashboard</a></li>
+                            <li><a asp-page="/Admin/Index">Logs Dashboard</a></li>
                             <li><a asp-page="/Logout">Log Out</a></li>
                         }
-                        else if (string.Equals(role, "User", StringComparison.OrdinalIgnoreCase))
+                        else if (role == "User")
                         {
                             <li><a asp-page="/Booking/Index">My Bookings</a></li>
                             <li><a asp-page="/Logout">Log Out</a></li>
@@ -136,7 +136,6 @@
     <script src="~/assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="~/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
     <script src="~/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-
     <script src="~/assets/js/main.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)

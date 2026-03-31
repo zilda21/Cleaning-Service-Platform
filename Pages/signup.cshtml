@@ -12,26 +12,23 @@
             <h2 class="text-center mb-4 auth-title">Create Account</h2>
 
             <form method="post" action="/api/auth/registered">
-
                 <div class="mb-3">
-                    <label class="form-label"></label>
-                    <input class="form-control" placeholder="Full name" required />
+                    <input name="Name" class="form-control" placeholder="Full name" required />
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label"></label>
-                    <input class="form-control" placeholder="your@email.com" required />
+                    <input name="Email" type="email" class="form-control" placeholder="your@email.com" required />
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label"></label>
-                    <input type="password" class="form-control" placeholder="Choose a password" required />
+                    <input name="Password" type="password" class="form-control" placeholder="Choose a password" required />
                 </div>
+
+                <input type="hidden" name="Role" value="User" />
 
                 <button type="submit" class="btn btn-primary w-100 py-2">
                     Sign Up
                 </button>
-
             </form>
 
             <div class="text-center mt-3 auth-link">

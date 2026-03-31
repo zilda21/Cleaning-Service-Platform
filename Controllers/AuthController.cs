@@ -40,15 +40,25 @@ public IActionResult Read()
 }
 
 [HttpPost("registered")]
-
 public IActionResult Create([FromForm] User newUser)
 {
-    _context.Add(newUser);
+    if (string.IsNullOrWhiteSpace(newUser.Name) ||
+        string.IsNullOrWhiteSpace(newUser.Email) ||
+        string.IsNullOrWhiteSpace(newUser.Password))
+    {
+        return Redirect("/signup?error=1");
+    }
+
+    if (string.IsNullOrWhiteSpace(newUser.Role))
+    {
+        newUser.Role = "User";
+    }
+
+    _context.Users.Add(newUser);
     _context.SaveChanges();
 
     return Redirect("/login");
 }
-
 [HttpPost("login")]
 [Consumes("application/x-www-form-urlencoded")]
 public IActionResult Login([FromForm] string? Email, [FromForm] string? Password)
