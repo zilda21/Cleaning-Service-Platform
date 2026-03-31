@@ -1,9 +1,21 @@
 ﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Features
 @inject IHttpContextAccessor HttpContextAccessor
 
 @{
     var bodyClass = (ViewData["BodyClass"] as string) ?? "starter-page";
-    var role = HttpContextAccessor?.HttpContext?.Session?.GetString("Role");
+
+    string? role = null;
+    var httpContext = HttpContextAccessor?.HttpContext;
+
+    if (httpContext != null)
+    {
+        var sessionFeature = httpContext.Features.Get<ISessionFeature>();
+        if (sessionFeature?.Session != null)
+        {
+            role = sessionFeature.Session.GetString("Role");
+        }
+    }
 }
 
 <!DOCTYPE html>

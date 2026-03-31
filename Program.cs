@@ -10,7 +10,12 @@ builder.Services.AddHttpClient();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddDistributedMemoryCache();
-builder.Services.AddSession();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -39,31 +44,21 @@ else
     app.UseHsts();
 }
 
+app.UseStaticFiles();
+app.UseRouting();
+
+app.UseSession();
+
 app.MapGet("/time/utc", () => Results.Ok(DateTime.UtcNow));
+
 app.MapRazorPages();
 app.MapControllers();
 
+// Keep this only if your Render DB connection is working
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     db.Database.Migrate();
 }
-
-app.Run();
-// Render handles HTTPS before traffic reaches the app
-// app.UseHttpsRedirection();
-
-app.UseStaticFiles();
-app.UseRouting();
-app.UseSession();
-
-// Test route
-app.MapGet("/time/utc", () => Results.Ok(DateTime.UtcNow));
-
-// Endpoints
-app.MapRazorPages();
-app.MapControllers();
-
-
 
 app.Run();
