@@ -1,45 +1,45 @@
 /* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
-a.navbar-brand[b-704w30ump0] {
+a.navbar-brand[b-h9ygvoa33u] {
   white-space: normal;
   text-align: center;
   word-break: break-all;
 }
 
-a[b-704w30ump0] {
+a[b-h9ygvoa33u] {
   color: #0077cc;
 }
 
-.btn-primary[b-704w30ump0] {
+.btn-primary[b-h9ygvoa33u] {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
 
-.nav-pills .nav-link.active[b-704w30ump0], .nav-pills .show > .nav-link[b-704w30ump0] {
+.nav-pills .nav-link.active[b-h9ygvoa33u], .nav-pills .show > .nav-link[b-h9ygvoa33u] {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
 
-.border-top[b-704w30ump0] {
+.border-top[b-h9ygvoa33u] {
   border-top: 1px solid #e5e5e5;
 }
-.border-bottom[b-704w30ump0] {
+.border-bottom[b-h9ygvoa33u] {
   border-bottom: 1px solid #e5e5e5;
 }
 
-.box-shadow[b-704w30ump0] {
+.box-shadow[b-h9ygvoa33u] {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
-button.accept-policy[b-704w30ump0] {
+button.accept-policy[b-h9ygvoa33u] {
   font-size: 1rem;
   line-height: inherit;
 }
 
-.footer[b-704w30ump0] {
+.footer[b-h9ygvoa33u] {
   position: absolute;
   bottom: 0;
   width: 100%;

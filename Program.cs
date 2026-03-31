@@ -1,6 +1,9 @@
 using CleaningService.Data;
 using Microsoft.EntityFrameworkCore;
 
+
+using Microsoft.EntityFrameworkCore.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -20,9 +23,9 @@ builder.Services.AddHttpContextAccessor(); // <-- THIS LINE WAS MISSING
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 
-// Swagger
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// Authentication
+
+
 
 // Database
 var cs = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -45,8 +48,10 @@ else
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+
 app.UseStaticFiles();
+
+app.MapGet("time/utc", () => Results.Ok(DateTime.UtcNow));
 
 app.UseRouting();
 
