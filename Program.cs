@@ -39,6 +39,17 @@ else
     app.UseHsts();
 }
 
+app.MapGet("/time/utc", () => Results.Ok(DateTime.UtcNow));
+app.MapRazorPages();
+app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate();
+}
+
+app.Run();
 // Render handles HTTPS before traffic reaches the app
 // app.UseHttpsRedirection();
 
