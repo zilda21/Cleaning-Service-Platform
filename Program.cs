@@ -1,42 +1,33 @@
 using CleaningService.Data;
 using Microsoft.EntityFrameworkCore;
 
-
-using Microsoft.EntityFrameworkCore.Infrastructure;
-
 var builder = WebApplication.CreateBuilder(args);
 
-
+// Services
 builder.Services.AddRazorPages();
-
-
 builder.Services.AddControllers();
-
-// ✅ HttpClientFactory (fixes: Unable to resolve IHttpClientFactory)
 builder.Services.AddHttpClient();
+builder.Services.AddHttpContextAccessor();
 
-
-builder.Services.AddSession();
-builder.Services.AddHttpContextAccessor(); // <-- THIS LINE WAS MISSING
-
-// ✅ Session (for Role stored in session)
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 
-// Authentication
-
-
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 // Database
 var cs = builder.Configuration.GetConnectionString("DefaultConnection");
 if (string.IsNullOrWhiteSpace(cs))
+{
     throw new InvalidOperationException("Missing ConnectionStrings:DefaultConnection.");
+}
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(cs));
 
 var app = builder.Build();
 
+// Middleware
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -48,21 +39,25 @@ else
     app.UseHsts();
 }
 
+// Render handles HTTPS before traffic reaches the app
+// app.UseHttpsRedirection();
 
 app.UseStaticFiles();
-
-app.MapGet("time/utc", () => Results.Ok(DateTime.UtcNow));
-
 app.UseRouting();
-
-// ✅ IMPORTANT: Session after routing, before endpoints
 app.UseSession();
 
-// (You are NOT using real auth yet)
-// app.UseAuthentication();
-// app.UseAuthorization();
+// Test route
+app.MapGet("/time/utc", () => Results.Ok(DateTime.UtcNow));
 
+// Endpoints
 app.MapRazorPages();
 app.MapControllers();
+
+// Apply migrations automatically
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate();
+}
 
 app.Run();
