@@ -10,7 +10,7 @@ This project demonstrates **ASP.NET Core full-stack development**, REST APIs, Po
 
 The application is deployed online:
 
-https://cleaning-service-full-stack-app.onrender.com/
+https://cleaning-service-platform.onrender.com
 
 Hosted on **Render Cloud** with **PostgreSQL database integration**.
 
